@@ -1,0 +1,49 @@
+{
+    "name": "theanh/tad-system",
+    "description": "TAD CMS system.",
+    "keywords": [
+        "laravel cms",
+        "tad cms",
+        "laravel cms like wordpress",
+        "cms like wordpress"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "The Anh Dang",
+          "email": "dangtheanh16@gmail.com",
+          "role": "Developer",
+          "homepage": "https://fb.com/TheAnhDang.1996"
+        }
+    ],
+    "support": {
+        "email": "support@example.org",
+        "docs": "https://example.org/composer"
+    },
+    "require": {
+        "php": ">=7.2",
+        "theanh/laravel-email-template": "1.*",
+        "theanh/laravel-filemanager": "1.*",
+        "theanh/laravel-hooks": "1.*",
+        "theanh/laravel-module": "1.*",
+        "theanh/laravel-multitheme": "1.*",
+        "spatie/laravel-permission": "^4.0",
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "require-dev": {
+      "laravel/laravel": "^6.0 | ^7.0 | ^8.0",
+      "phpunit/phpunit": "6.0 | 7.0 | 7.5 | 8.4 | ^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+          "Tadcms\\System\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+              "Tadcms\\System\\Providers\\SystemServiceProvider"
+            ]
+        }
+    }
+}
