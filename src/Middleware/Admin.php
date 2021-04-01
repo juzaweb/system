@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\System\Http\Middleware;
+namespace Tadcms\System\Middleware;
 
 use Closure;
 
@@ -19,9 +19,9 @@ class Admin
             return redirect()->route('admin.login');
         }
         
-        /*if (\Auth::user()->is_admin == 0) {
+        if (\Auth::user()->is_admin == 0) {
             return redirect()->to('/');
-        }*/
+        }
         
         do_action('admin.middleware');
         

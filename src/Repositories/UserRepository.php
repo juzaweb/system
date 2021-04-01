@@ -1,6 +1,8 @@
 <?php
 
-namespace Lararepo\Repositories;
+namespace Tadcms\System\Repositories;
+
+use Theanh\Lararepo\Repositories\EloquentRepository;
 
 class UserRepository extends EloquentRepository
 {

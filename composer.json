@@ -1,12 +1,7 @@
 {
     "name": "theanh/tad-system",
     "description": "TAD CMS system.",
-    "keywords": [
-        "laravel cms",
-        "tad cms",
-        "laravel cms like wordpress",
-        "cms like wordpress"
-    ],
+    "keywords": [],
     "license": "MIT",
     "authors": [
         {
@@ -42,7 +37,7 @@
     "extra": {
         "laravel": {
             "providers": [
-              "Tadcms\\System\\Providers\\SystemServiceProvider"
+                "Tadcms\\System\\SystemServiceProvider"
             ]
         }
     }

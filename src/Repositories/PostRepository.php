@@ -1,12 +1,14 @@
 <?php
 
-namespace Lararepo\Repositories;
+namespace Tadcms\System\Repositories;
+
+use Theanh\Lararepo\Repositories\EloquentRepository;
 
 class PostRepository extends EloquentRepository
 {
     public function model()
     {
-        return \Tadcms\Models\Post::class;
+        return \Tadcms\System\Models\Post::class;
     }
     
     
