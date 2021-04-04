@@ -22,6 +22,7 @@ class UpdateUsersTable extends Migration
     
         Schema::table('users', function (Blueprint $table) {
             $table->string('avatar', 150)->nullable();
+            $table->string('verification_token', 100)->nullable();
             $table->string('status', 50)->index()->default('active');
             $table->boolean('is_admin')->default(0)->index();
         });

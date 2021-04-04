@@ -45,7 +45,7 @@ class Config extends Model
      * @return string|bool
      * */
     public static function getConfig($key, $default = null) {
-        $config = Config::find($key);
+        $config = Config::find($key, ['config_value']);
         
         if ($config) {
             return $config->config_value;
