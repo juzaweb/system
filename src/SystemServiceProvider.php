@@ -3,6 +3,7 @@
 namespace Tadcms\System;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Builder;
 
 /**
  * Class Tadcms\System\SystemServiceProvider
@@ -16,8 +17,8 @@ class SystemServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        Builder::defaultStringLength(150);
         $this->bootDatabases();
-        $this->bootMiddlewares();
     }
     
     public function register()
@@ -28,9 +29,5 @@ class SystemServiceProvider extends ServiceProvider
     protected function bootDatabases() {
         $this->loadMigrationsFrom(__DIR__.'/../databases/migrations');
         $this->loadFactoriesFrom(__DIR__.'/../databases/factories');
-    }
-    
-    protected function bootMiddlewares() {
-        $this->app['router']->aliasMiddleware('admin', \Tadcms\System\Middleware\Admin::class);
     }
 }

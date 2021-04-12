@@ -2,7 +2,7 @@
 
 namespace Tadcms\System\Traits;
 
-trait UserModify
+trait UserModifyAble
 {
     public static function bootUserModify()
     {
@@ -13,8 +13,9 @@ trait UserModify
                     $model->created_by = $user_id;
                     $model->updated_by = $user_id;
                 }
-                elseif ($event=='updating')
+                elseif ($event=='updating') {
                     $model->updated_by = $user_id;
+                }
             });
         }
     }

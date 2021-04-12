@@ -3,6 +3,8 @@
 namespace Tadcms\System\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Tadcms\System\Traits\ThumbnailAble;
+use Tadcms\System\Traits\UserModifyAble;
 
 /**
  * Tadcms\System\Models\Post
@@ -32,25 +34,29 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Post extends Model
 {
+    use UserModifyAble, ThumbnailAble;
+    
     protected $table = 'posts';
     protected $fillable = [
         'title',
         'content',
         'type',
-        'created_by',
-        'updated_by',
         'status',
     ];
     
-    public function comments() {
-        return $this->hasMany('Tadcms\System\Models\Comment', 'post_id', 'id');
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
     }
     
-    public function metas() {
-        return $this->hasMany('Tadcms\System\Models\PostMeta', 'post_id', 'id');
+    public function metas()
+    {
+        return $this->hasMany(PostMeta::class, 'post_id', 'id');
     }
     
-    public function taxonomies() {
-        return $this->morphToMany('Tadcms\System\Models\PostTaxonomy', 'post', 'post_taxonomies');
+    public function taxonomies()
+    {
+        return $this->belongsToMany(Taxonomy::class, 'post_taxonomies', 'post_id', 'taxonomy_id')
+            ->withPivot('post_type');
     }
 }

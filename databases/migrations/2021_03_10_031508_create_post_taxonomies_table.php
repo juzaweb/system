@@ -8,16 +8,20 @@ class CreatePostTaxonomiesTable extends Migration
 {
     public function up()
     {
-        Schema::create('post_taxonomies', function (Blueprint $table) {
-            $table->bigInteger('post_id')->index();
+        Schema::create('term_taxonomies', function (Blueprint $table) {
+            $table->bigInteger('term_id')->index();
             $table->bigInteger('taxonomy_id')->index();
-            $table->string('post_type', 50)->index();
-            $table->primary(['post_id', 'taxonomy_id', 'post_type']);
+            $table->string('term_type', 100)->index();
+            $table->primary([
+                'term_id',
+                'term_type',
+                'taxonomy_id'
+            ]);
         });
     }
     
     public function down()
     {
-        Schema::dropIfExists('post_taxonomies');
+        Schema::dropIfExists('term_taxonomies');
     }
 }

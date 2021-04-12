@@ -44,7 +44,8 @@ class Config extends Model
      * @param string|null $default
      * @return string|bool
      * */
-    public static function getConfig($key, $default = null) {
+    public static function getConfig($key, $default = null)
+    {
         $config = Config::find($key, ['config_value']);
         
         if ($config) {
@@ -61,11 +62,35 @@ class Config extends Model
      * @param string|null $value
      * @return \Tadcms\System\Models\Config|static
      * */
-    public static function setConfig($key, $value = null) {
+    public static function setConfig($key, $value = null)
+    {
         return Config::updateOrCreate([
             'config_key' => $key
         ], [
             'config_value' => $value,
         ]);
+    }
+    
+    public static function getConfigEmail()
+    {
+        $setting = Config::where('config_key','like','email_%')->get();
+        if ($setting->isNotEmpty()) {
+            $settingArray = $setting
+                ->pluck('config_value','config_key')
+                ->toArray();
+            
+            return array_merge([
+                'email_setting' => null,
+                'email_host' => null,
+                'email_port' => null,
+                'email_encryption' => null,
+                'email_username' => null,
+                'email_password' => null,
+                'email_from_address' => null,
+                'email_from_name' => null,
+            ], $settingArray);
+        }
+        
+        return null;
     }
 }

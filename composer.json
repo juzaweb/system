@@ -16,6 +16,7 @@
     },
     "require": {
         "php": ">=7.2",
+        "livewire/livewire": "^1.3.6",
         "theanh/laravel-email-template": "1.*",
         "theanh/laravel-filemanager": "^1.0.1",
         "theanh/laravel-hooks": "1.*",

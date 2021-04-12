@@ -3,6 +3,7 @@
 namespace Tadcms\System\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Tadcms\System\Traits\UserModifyAble;
 
 /**
  * Tadcms\System\Models\Taxonomy
@@ -26,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Taxonomy extends Model
 {
+    use UserModifyAble;
+    
     protected $table = 'taxonomies';
     protected $fillable = [
         'name',
@@ -33,7 +36,18 @@ class Taxonomy extends Model
         'type',
         'thumbnail',
         'taxonomy',
+        'parent_id',
     ];
+    
+    public function parent()
+    {
+        return $this->belongsTo(Taxonomy::class, 'parent_id', 'id');
+    }
+    
+    public function childrens()
+    {
+        return $this->hasMany(Taxonomy::class, 'parent_id', 'id');
+    }
     
     public function posts()
     {

@@ -10,14 +10,15 @@ class CreateTaxonomiesTable extends Migration
     {
         Schema::create('taxonomies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name', 200);
             $table->string('thumbnail', 150)->index()->nullable();
             $table->text('description')->nullable();
-            $table->string('taxonomy', 50)->index();
+            $table->string('taxonomy', 100)->index();
+            $table->string('slug', 100)->index();
             $table->bigInteger('parent_id')->nullable()->index();
             $table->bigInteger('count')->default(0);
-            $table->bigInteger('created_by')->index();
-            $table->bigInteger('updated_by')->index();
+            $table->bigInteger('created_by')->nullable()->index();
+            $table->bigInteger('updated_by')->nullable()->index();
             $table->timestamps();
         });
     }

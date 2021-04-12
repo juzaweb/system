@@ -10,7 +10,7 @@ class CreateConfigsTable extends Migration
     {
         Schema::create('configs', function (Blueprint $table) {
             $table->string('config_key', 150)->primary();
-            $table->string('config_value')->nullable();
+            $table->string('config_value', 250)->nullable();
         });
     }
     

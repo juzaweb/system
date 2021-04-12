@@ -2,13 +2,13 @@
 
 namespace Tadcms\System\Repositories;
 
-use Tadcms\System\Models\Taxonomy;
+use Tadcms\System\Models\Comment;
 use Theanh\Lararepo\Repositories\EloquentRepository;
 
-class TaxonomyRepository extends EloquentRepository
+class CommentRepository extends EloquentRepository
 {
     public function model()
     {
-        return Taxonomy::class;
+        return Comment::class;
     }
 }
