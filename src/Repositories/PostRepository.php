@@ -22,26 +22,23 @@ class PostRepository extends EloquentRepository
     public function create(array $attributes)
     {
         $model = parent::create($attributes);
-        $model->taxonomies()->sync($attributes['categories']);
-        $model->taxonomies()->sync($attributes['tags']);
+        $taxonomies = $attributes['taxonomies'] ?? [];
+        $model->taxonomies()->sync(
+            $this->combinePivot($taxonomies, [
+                'term_type' => 'post-type'
+            ])
+        );
     }
     
     public function update($id, array $attributes)
     {
         $model = parent::update($id, $attributes);
-        $config = $this->getConfig($model->type);
-        $supports = Arr::get($config, 'supports', []);
-        
-        if (in_array('category', $supports)) {
-            $categories = Arr::get($attributes, 'categories');
-            
-            $model->taxonomies()->sync($this->combinePivot($categories, ['post_type' => $model->type]));
-        }
-    
-        if (in_array('tag', $supports)) {
-            $tags = Arr::get($attributes, 'tags');
-            $model->taxonomies()->sync($tags);
-        }
+        $taxonomies = $attributes['taxonomies'] ?? [];
+        $model->taxonomies()->sync(
+            $this->combinePivot($taxonomies, [
+                'term_type' => 'post-type'
+            ])
+        );
     }
     
     /**

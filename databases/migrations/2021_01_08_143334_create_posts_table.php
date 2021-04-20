@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
             $table->string('type', 20)->index();
             $table->string('status', 50)->index()->default('draft');
             $table->integer('comment_count')->default(0);
+            $table->string('thumbnail', 150)->nullable();
             $table->string('slug', 100)->index();
             $table->bigInteger('created_by')->index();
             $table->bigInteger('updated_by')->index();

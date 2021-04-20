@@ -53,3 +53,12 @@ function upload_url($path, $default = null) {
     
     return asset('vendor/tadcms/images/avatar.png');
 }
+
+function path_url(string $url)
+{
+    if (!is_url($url)) {
+        return $url;
+    }
+    
+    return parse_url($url)['path'];
+}

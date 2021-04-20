@@ -2,27 +2,19 @@
 
 namespace Tadcms\System\Traits;
 
-use App\Models\Files;
 use Illuminate\Support\Str;
 
 trait ThumbnailAble {
     
-    public static function bootUseThumbnail()
+    public static function bootThumbnailAble()
     {
-        $thumbnail = request()->post('thumbnail');
+        $thumbnail = request()->input('thumbnail');
         static::saving(function ($model) use ($thumbnail) {
             if (empty($thumbnail)) {
                 $thumbnail = $model->thumbnail;
             }
             
-            if ($thumbnail) {
-                if (is_url($thumbnail)) {
-                    $thumbnail = $model->downloadThumbnail($thumbnail);
-                }
-                
-                $thumbnail = $model->resizeThumbnail($thumbnail);
-                $model->thumbnail = $model->cutPathThumbnail($thumbnail);
-            }
+            $model->thumbnail = $thumbnail;
         });
     }
     

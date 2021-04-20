@@ -4,6 +4,7 @@ namespace Tadcms\System;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Schema\Builder;
+use Tadcms\System\Providers\BladeCompilerServiceProvider;
 
 /**
  * Class Tadcms\System\SystemServiceProvider
@@ -20,13 +21,14 @@ class SystemServiceProvider extends ServiceProvider
         Builder::defaultStringLength(150);
         $this->bootDatabases();
     }
-    
+
     public function register()
     {
-    
+        $this->app->register(BladeCompilerServiceProvider::class);
     }
-    
-    protected function bootDatabases() {
+
+    protected function bootDatabases()
+    {
         $this->loadMigrationsFrom(__DIR__.'/../databases/migrations');
         $this->loadFactoriesFrom(__DIR__.'/../databases/factories');
     }

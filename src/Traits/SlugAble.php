@@ -6,10 +6,10 @@ use Illuminate\Support\Str;
 
 trait SlugAble {
     
-    public static function bootUseSlug()
+    public static function bootSlugAble()
     {
         static::saving(function ($model) {
-            $model->slug = $model->generateSlug($model->name ?: $model->title);
+            $model->slug = $model->generateSlug($model->{$model->slugSource});
         });
     }
     

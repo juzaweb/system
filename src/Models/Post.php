@@ -3,6 +3,7 @@
 namespace Tadcms\System\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Tadcms\System\Traits\SlugAble;
 use Tadcms\System\Traits\ThumbnailAble;
 use Tadcms\System\Traits\UserModifyAble;
 
@@ -34,7 +35,7 @@ use Tadcms\System\Traits\UserModifyAble;
  */
 class Post extends Model
 {
-    use UserModifyAble, ThumbnailAble;
+    use UserModifyAble, ThumbnailAble, SlugAble;
     
     protected $table = 'posts';
     protected $fillable = [
@@ -43,6 +44,8 @@ class Post extends Model
         'type',
         'status',
     ];
+    
+    protected $slugSource = 'title';
     
     public function comments()
     {
@@ -56,7 +59,8 @@ class Post extends Model
     
     public function taxonomies()
     {
-        return $this->belongsToMany(Taxonomy::class, 'post_taxonomies', 'post_id', 'taxonomy_id')
-            ->withPivot('post_type');
+        return $this->belongsToMany(Taxonomy::class, 'term_taxonomies', 'term_id', 'taxonomy_id')
+            ->wherePivot('term_type', '=', 'post-type')
+            ->withPivot(['term_type']);
     }
 }

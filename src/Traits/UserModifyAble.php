@@ -4,7 +4,7 @@ namespace Tadcms\System\Traits;
 
 trait UserModifyAble
 {
-    public static function bootUserModify()
+    public static function bootUserModifyAble()
     {
         foreach (static::getModelEvents() as $event) {
             static::$event(function ($model) use ($event) {
