@@ -10,13 +10,9 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title', 250);
-            $table->longText('content')->nullable();
-            $table->string('type', 20)->index();
+            $table->string('type', 20)->index()->default('post');
             $table->string('status', 50)->index()->default('draft');
             $table->integer('comment_count')->default(0);
-            $table->string('thumbnail', 150)->nullable();
-            $table->string('slug', 100)->index();
             $table->bigInteger('created_by')->index();
             $table->bigInteger('updated_by')->index();
             $table->timestamps();

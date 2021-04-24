@@ -24,6 +24,7 @@
         "theanh/laravel-module": "^1.0.2",
         "theanh/laravel-multitheme": "1.*",
         "tymon/jwt-auth": "^1.0",
+        "spatie/laravel-translatable": "^4.6",
         "spatie/laravel-permission": "^4.0",
         "guzzlehttp/guzzle": "^6.5"
     },

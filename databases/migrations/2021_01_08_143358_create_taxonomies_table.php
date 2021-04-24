@@ -10,9 +10,7 @@ class CreateTaxonomiesTable extends Migration
     {
         Schema::create('taxonomies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 200);
-            $table->string('thumbnail', 150)->index()->nullable();
-            $table->text('description')->nullable();
+            $table->string('type', 100)->index();
             $table->string('taxonomy', 100)->index();
             $table->string('slug', 100)->index();
             $table->bigInteger('parent_id')->nullable()->index();
