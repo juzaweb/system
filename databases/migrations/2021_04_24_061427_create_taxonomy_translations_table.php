@@ -16,6 +16,7 @@ class CreateTaxonomyTranslationsTable extends Migration
             $table->string('thumbnail', 150)->nullable();
             $table->text('description')->nullable();
 
+            $table->unique(['taxonomy_id', 'locale']);
             $table->foreign('taxonomy_id')
                 ->references('id')
                 ->on('taxonomies')

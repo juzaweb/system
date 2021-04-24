@@ -5,14 +5,14 @@ namespace Tadcms\System\Models;
 use Illuminate\Database\Eloquent\Model;
 use Tadcms\System\Traits\SlugAble;
 use Tadcms\System\Traits\ThumbnailAble;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 use Tadcms\System\Traits\UserModifyAble;
 
 /**
  * Tadcms\System\Models\Post
  *
  * @property int $id
- * @property string $title
- * @property string|null $content
  * @property int $created_by
  * @property int $updated_by
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -33,19 +33,23 @@ use Tadcms\System\Traits\UserModifyAble;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-class Post extends Model
+class Post extends Model implements TranslatableContract
 {
-    use UserModifyAble, ThumbnailAble, SlugAble;
+    use UserModifyAble, ThumbnailAble, SlugAble, Translatable;
     
     protected $table = 'posts';
     protected $fillable = [
-        'title',
-        'content',
         'type',
         'status',
     ];
     
     protected $slugSource = 'title';
+    public $translatedAttributes = [
+        'title',
+        'content',
+        'thumbnail',
+        'slug'
+    ];
     
     public function comments()
     {

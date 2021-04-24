@@ -17,6 +17,7 @@ class CreatePostTranslationsTable extends Migration
             $table->string('thumbnail', 150)->nullable();
             $table->string('slug', 100)->index();
 
+            $table->unique(['post_id', 'locale']);
             $table->foreign('post_id')
                 ->references('id')
                 ->on('posts')

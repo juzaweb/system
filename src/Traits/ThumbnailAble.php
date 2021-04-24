@@ -4,8 +4,8 @@ namespace Tadcms\System\Traits;
 
 use Illuminate\Support\Str;
 
-trait ThumbnailAble {
-    
+trait ThumbnailAble
+{
     public static function bootThumbnailAble()
     {
         $thumbnail = request()->input('thumbnail');
@@ -13,12 +13,13 @@ trait ThumbnailAble {
             if (empty($thumbnail)) {
                 $thumbnail = $model->thumbnail;
             }
-            
+
             $model->thumbnail = $thumbnail;
         });
     }
     
-    public function getThumbnail($thumb = true) {
+    public function getThumbnail($thumb = true)
+    {
         if ($this->resize) {
             if ($thumb) {
                 return upload_url($this->thumbnail);
@@ -30,7 +31,8 @@ trait ThumbnailAble {
         return upload_url($this->thumbnail);
     }
     
-    protected function downloadThumbnail($thumbnail) {
+    protected function downloadThumbnail($thumbnail)
+    {
         $data['name'] = $this->getFileNameThumbnail($thumbnail);
         $slip = explode('.', $data['name']);
         $data['extension'] = $slip[count($slip) - 1];
@@ -56,15 +58,15 @@ trait ThumbnailAble {
                 
                 return $data['path'];
             }
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return false;
         }
         
         return false;
     }
     
-    protected function resizeThumbnail($thumbnail) {
+    protected function resizeThumbnail($thumbnail)
+    {
         if (!isset($this->resize) || empty($this->resize)) {
             return $thumbnail;
         }
@@ -101,21 +103,25 @@ trait ThumbnailAble {
         return null;
     }
     
-    protected function getFileNameThumbnail($thumbnail) {
+    protected function getFileNameThumbnail($thumbnail)
+    {
         return explode('/', $thumbnail)[count(explode('/', $thumbnail)) - 1];
     }
     
-    protected function getDirPathThumbnail($thumbnail) {
+    protected function getDirPathThumbnail($thumbnail)
+    {
         $path = $this->getPathThumbnail($thumbnail);
         $file_name = $this->getFileNameThumbnail($thumbnail);
         return str_replace('/' . $file_name, '', $path);
     }
     
-    protected function getPathThumbnail($thumbnail) {
+    protected function getPathThumbnail($thumbnail)
+    {
         return \Storage::disk('public')->path($thumbnail);
     }
     
-    protected function cutPathThumbnail($thumbnail) {
+    protected function cutPathThumbnail($thumbnail)
+    {
         if ($thumbnail) {
             $upload_path = \Storage::disk('public')->path('');
             return str_replace($upload_path, '', $thumbnail);

@@ -4,8 +4,8 @@ namespace Tadcms\System\Traits;
 
 use Illuminate\Support\Str;
 
-trait SlugAble {
-    
+trait SlugAble
+{
     public static function bootSlugAble()
     {
         static::saving(function ($model) {
@@ -13,20 +13,20 @@ trait SlugAble {
         });
     }
     
-    protected function generateSlug($string) {
-        $slug = request()->post('slug');
-        
+    protected function generateSlug($string)
+    {
+        $slug = request()->input('slug');
         if ($slug) {
-            $slug = substr($slug, 0, 70);
-            $slug = Str::slug($slug);
-        }
-        else {
+            return $slug;
+        } else {
             $slug = substr($string, 0, 70);
             $slug = Str::slug($slug);
         }
-        
+
         $count = self::where('id', '!=', $this->id)
-            ->where('slug', 'like', $slug . '%')
+            ->whereHas('translations', function ($q) use ($slug) {
+                $q->where('slug', 'like', $slug . '%');
+            })
             ->count();
     
         if ($count > 0) {
@@ -35,5 +35,4 @@ trait SlugAble {
         
         return $slug;
     }
-    
 }
