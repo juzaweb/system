@@ -17,10 +17,27 @@ class CreatePostsTable extends Migration
             $table->bigInteger('updated_by')->index();
             $table->timestamps();
         });
+
+        Schema::create('post_translations', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('post_id');
+            $table->string('locale', 5)->index();
+            $table->string('title', 250);
+            $table->longText('content')->nullable();
+            $table->string('thumbnail', 150)->nullable();
+            $table->string('slug', 100)->index();
+
+            $table->unique(['post_id', 'locale']);
+            $table->foreign('post_id')
+                ->references('id')
+                ->on('posts')
+                ->onDelete('cascade');
+        });
     }
     
     public function down()
     {
+        Schema::dropIfExists('post_translations');
         Schema::dropIfExists('posts');
     }
 }
