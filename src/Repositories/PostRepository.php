@@ -4,7 +4,7 @@ namespace Tadcms\System\Repositories;
 
 use Illuminate\Support\Arr;
 use Tadcms\System\Models\Post;
-use Theanh\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Lararepo\Repositories\EloquentRepository;
 
 class PostRepository extends EloquentRepository
 {

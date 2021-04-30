@@ -4,7 +4,7 @@ namespace Tadcms\System\Repositories;
 
 use Illuminate\Support\Arr;
 use Tadcms\System\Models\Taxonomy;
-use Theanh\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Lararepo\Repositories\EloquentRepository;
 
 class TaxonomyRepository extends EloquentRepository
 {

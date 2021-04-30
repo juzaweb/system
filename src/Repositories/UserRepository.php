@@ -2,7 +2,7 @@
 
 namespace Tadcms\System\Repositories;
 
-use Theanh\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Lararepo\Repositories\EloquentRepository;
 
 class UserRepository extends EloquentRepository
 {

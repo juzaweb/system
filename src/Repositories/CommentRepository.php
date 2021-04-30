@@ -3,7 +3,7 @@
 namespace Tadcms\System\Repositories;
 
 use Tadcms\System\Models\Comment;
-use Theanh\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Lararepo\Repositories\EloquentRepository;
 
 class CommentRepository extends EloquentRepository
 {

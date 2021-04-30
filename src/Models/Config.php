@@ -2,9 +2,9 @@
 /**
  * Tad CMS Tadcms\System\Models\Config
  *
- * @package    Theanh\Tadcms
+ * @package    Tadcms\Tadcms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://github.com/theanhk/tadcms
+ * @link       https://github.com/tadcms/tadcms
  * @license    MIT
  */
 
