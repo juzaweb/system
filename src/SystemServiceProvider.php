@@ -4,6 +4,8 @@ namespace Tadcms\System;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Schema\Builder;
+use Tadcms\System\Providers\RepositoryServiceProvider;
+use Tadcms\System\Middleware\XFrameHeadersMiddleware;
 use Tadcms\System\Providers\BladeCompilerServiceProvider;
 
 /**
@@ -20,6 +22,7 @@ class SystemServiceProvider extends ServiceProvider
     {
         Builder::defaultStringLength(150);
         $this->bootDatabases();
+        $this->bootMiddlewares();
     }
 
     public function register()
@@ -27,6 +30,7 @@ class SystemServiceProvider extends ServiceProvider
         $this->registerServiceProvider();
         $this->registerMergeConfigs();
         $this->app->register(BladeCompilerServiceProvider::class);
+        $this->app->register(RepositoryServiceProvider::class);
     }
 
     protected function bootDatabases()
@@ -38,7 +42,8 @@ class SystemServiceProvider extends ServiceProvider
     protected function registerMergeConfigs()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/tadcms.php', 'tadcms'
+            __DIR__ . '/../config/tadcms.php',
+            'tadcms'
         );
 
         /*$this->mergeConfigFrom(
@@ -50,13 +55,15 @@ class SystemServiceProvider extends ServiceProvider
         );*/
     }
 
-    protected function registerServiceProvider() {
+    protected function registerServiceProvider()
+    {
         $this->app->register(\Tadcms\System\Providers\RouteServiceProvider::class);
         //$this->app->register(\Tadcms\Providers\PluginServiceProvider::class);
         //$this->app->register(\Tadcms\Providers\BladeServiceProvider::class);
     }
 
-    protected function bootPublishes() {
+    protected function bootPublishes()
+    {
         $this->publishes([
             __DIR__.'/../config/tadcms.php' => config_path('tadcms.php'),
             __DIR__.'/../config/themes.php' => config_path('themes.php'),
@@ -70,5 +77,11 @@ class SystemServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/tadcms'),
         ], 'lang');
+    }
+
+    protected function bootMiddlewares()
+    {
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', XFrameHeadersMiddleware::class);
     }
 }

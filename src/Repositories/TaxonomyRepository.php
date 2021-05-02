@@ -2,13 +2,14 @@
 
 namespace Tadcms\System\Repositories;
 
-use Tadcms\System\Models\Taxonomy;
-use Tadcms\Repository\Eloquent\BaseRepository;
+use Tadcms\Repository\Contracts\RepositoryInterface;
 
-class TaxonomyRepository extends BaseRepository
+/**
+ * Interface TaxonomyRepository.
+ *
+ * @package namespace Tadcms\System\Repositories;
+ */
+interface TaxonomyRepository extends RepositoryInterface
 {
-    public function model()
-    {
-        return Taxonomy::class;
-    }
+    //
 }

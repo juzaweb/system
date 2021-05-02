@@ -11,7 +11,7 @@ if (!file_exists('is_url')) {
      * */
     function is_url($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
             return false;
         }
         

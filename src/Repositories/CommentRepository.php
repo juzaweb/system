@@ -2,12 +2,14 @@
 
 namespace Tadcms\System\Repositories;
 
-use Tadcms\Repository\Eloquent\BaseRepository;
+use Tadcms\Repository\Contracts\RepositoryInterface;
 
-class CommentRepository extends BaseRepository
+/**
+ * Interface CommentRepository.
+ *
+ * @package namespace Tadcms\System\Repositories;
+ */
+interface CommentRepository extends RepositoryInterface
 {
-    public function model()
-    {
-        return 'Tadcms\System\Models\Comment';
-    }
+    //
 }

@@ -5,6 +5,7 @@ namespace Tadcms\System\Models;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Tadcms\System\Traits\SlugAble;
+use Tadcms\System\Traits\ThumbnailAble;
 use Tadcms\System\Traits\UserModifyAble;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
@@ -54,7 +55,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  */
 class Taxonomy extends Model implements TranslatableContract
 {
-    use UserModifyAble, Translatable, SlugAble;
+    use UserModifyAble, Translatable, SlugAble, ThumbnailAble;
     
     protected $table = 'taxonomies';
     protected $slugSource = 'name';

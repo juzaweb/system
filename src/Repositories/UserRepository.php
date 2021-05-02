@@ -2,35 +2,14 @@
 
 namespace Tadcms\System\Repositories;
 
-use Tadcms\Repository\Eloquent\BaseRepository;
+use Tadcms\Repository\Contracts\RepositoryInterface;
 
-class UserRepository extends BaseRepository
+/**
+ * Interface UserRepository.
+ *
+ * @package namespace Tadcms\System\Repositories;
+ */
+interface UserRepository extends RepositoryInterface
 {
-    public function model()
-    {
-        return \App\User::class;
-    }
-    
-    public function update(array $attributes, $id)
-    {
-        if (empty($attributes['password'])) {
-            unset($attributes['password']);
-        }
-        
-        return parent::update($attributes, $id);
-    }
-    
-    public function setAdmin($user, $isAdmin = 0)
-    {
-        return $this->find($user)
-            ->setAttribute('is_admin', $isAdmin)
-            ->save();
-    }
-    
-    public function setAvatar($user, $avatar)
-    {
-        return $this->find($user)
-            ->setAttribute('avatar', $avatar)
-            ->save();
-    }
+    //
 }
