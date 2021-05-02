@@ -2,13 +2,12 @@
 
 namespace Tadcms\System\Repositories;
 
-use Tadcms\System\Models\Comment;
-use Tadcms\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Repository\Eloquent\BaseRepository;
 
-class CommentRepository extends EloquentRepository
+class CommentRepository extends BaseRepository
 {
     public function model()
     {
-        return Comment::class;
+        return 'Tadcms\System\Models\Comment';
     }
 }

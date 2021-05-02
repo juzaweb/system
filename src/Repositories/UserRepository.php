@@ -2,22 +2,22 @@
 
 namespace Tadcms\System\Repositories;
 
-use Tadcms\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Repository\Eloquent\BaseRepository;
 
-class UserRepository extends EloquentRepository
+class UserRepository extends BaseRepository
 {
     public function model()
     {
         return \App\User::class;
     }
     
-    public function update($id, array $attributes)
+    public function update(array $attributes, $id)
     {
-        if (empty(@$attributes['password'])) {
+        if (empty($attributes['password'])) {
             unset($attributes['password']);
         }
         
-        return parent::update($id, $attributes);
+        return parent::update($attributes, $id);
     }
     
     public function setAdmin($user, $isAdmin = 0)

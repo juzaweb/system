@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UserMeta whereMetaValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserMeta whereUserId($value)
  * @mixin \Eloquent
+ * @property int $id
+ * @method static \Illuminate\Database\Eloquent\Builder|UserMeta whereId($value)
  */
 class UserMeta extends Model
 {

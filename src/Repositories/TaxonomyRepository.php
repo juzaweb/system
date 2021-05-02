@@ -2,23 +2,13 @@
 
 namespace Tadcms\System\Repositories;
 
-use Illuminate\Support\Arr;
 use Tadcms\System\Models\Taxonomy;
-use Tadcms\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Repository\Eloquent\BaseRepository;
 
-class TaxonomyRepository extends EloquentRepository
+class TaxonomyRepository extends BaseRepository
 {
     public function model()
     {
         return Taxonomy::class;
-    }
-    
-    public function getConfig($taxonomy = null)
-    {
-        $types = apply_filters('taxonomies', []);
-        if ($taxonomy) {
-            return collect(Arr::get($types, $taxonomy, []));
-        }
-        return collect($types);
     }
 }

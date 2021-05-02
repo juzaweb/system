@@ -17,6 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta whereMetaValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta wherePostId($value)
  * @mixin \Eloquent
+ * @property int $id
+ * @property-read \Tadcms\System\Models\Post $post
+ * @method static \Illuminate\Database\Eloquent\Builder|PostMeta whereId($value)
  */
 class PostMeta extends Model
 {

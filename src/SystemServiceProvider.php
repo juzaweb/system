@@ -64,11 +64,11 @@ class SystemServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../assets' => public_path('vendor/tadcms'),
+            __DIR__.'/../assets' => public_path('tadcms/assets'),
         ], 'assets');
 
         $this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/tadcms/tadcms'),
+            __DIR__.'/../resources/lang' => resource_path('lang/tadcms'),
         ], 'lang');
     }
 }

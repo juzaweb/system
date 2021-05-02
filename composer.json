@@ -24,9 +24,7 @@
         "tadcms/filemanager": "1.0.*",
         "tadcms/hooks": "1.0.*",
         "tadcms/module": "1.0.*",
-        "tadcms/multitheme": "1.0.*",
         "tymon/jwt-auth": "^1.0",
-        "spatie/laravel-translatable": "^4.6",
         "guzzlehttp/guzzle": "^6.5"
     },
     "require-dev": {

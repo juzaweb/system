@@ -32,6 +32,27 @@ use Tadcms\System\Traits\UserModifyAble;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedBy($value)
  * @mixin \Eloquent
+ * @property string $type
+ * @property string $status
+ * @property int $comment_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Tadcms\System\Models\Taxonomy[] $taxonomies
+ * @property-read int|null $taxonomies_count
+ * @property-read \Tadcms\System\Models\PostTranslation|null $translation
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Tadcms\System\Models\PostTranslation[] $translations
+ * @property-read int|null $translations_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Post listsTranslations(string $translationField)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post notTranslatedIn(?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post orWhereTranslation(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post orWhereTranslationLike(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post orderByTranslation(string $translationField, string $sortMethod = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Post translated()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post translatedIn(?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCommentCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTranslation(string $translationField, $value, ?string $locale = null, string $method = 'whereHas', string $operator = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTranslationLike(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post withTranslation()
  */
 class Post extends Model implements TranslatableContract
 {
@@ -63,8 +84,6 @@ class Post extends Model implements TranslatableContract
     
     public function taxonomies()
     {
-        return $this->belongsToMany(Taxonomy::class, 'term_taxonomies', 'term_id', 'taxonomy_id')
-            ->wherePivot('term_type', '=', 'post-type')
-            ->withPivot(['term_type']);
+        return $this->belongsToMany('Tadcms\System\Models\Taxonomy', 'term_taxonomies', 'term_id', 'taxonomy_id');
     }
 }

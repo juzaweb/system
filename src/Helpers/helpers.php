@@ -56,7 +56,7 @@ function upload_url($path, $default = null)
         return $default;
     }
     
-    return asset('vendor/tadcms/images/avatar.png');
+    return asset('tadcms/images/avatar.png');
 }
 
 function path_url(string $url)

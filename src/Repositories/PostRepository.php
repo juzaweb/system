@@ -4,9 +4,10 @@ namespace Tadcms\System\Repositories;
 
 use Illuminate\Support\Arr;
 use Tadcms\System\Models\Post;
-use Tadcms\Lararepo\Repositories\EloquentRepository;
+use Tadcms\Repository\Eloquent\BaseRepository;
+use Tadcms\System\Models\Taxonomy;
 
-class PostRepository extends EloquentRepository
+class PostRepository extends BaseRepository
 {
     public function model()
     {
@@ -23,45 +24,40 @@ class PostRepository extends EloquentRepository
     {
         $model = parent::create($attributes);
         $taxonomies = $attributes['taxonomies'] ?? [];
-        $model->taxonomies()->sync(
-            $this->combinePivot($taxonomies, [
-                'term_type' => 'post-type'
-            ])
-        );
-    }
-    
-    public function update($id, array $attributes)
-    {
-        $model = parent::update($id, $attributes);
-        $taxonomies = $attributes['taxonomies'] ?? [];
-        $model->taxonomies()->sync(
-            $this->combinePivot($taxonomies, [
-                'term_type' => 'post-type'
-            ])
-        );
-    }
-    
-    /**
-     * Create pivot array from given values
-     *
-     * @param array $entities
-     * @param array $pivots
-     * @return array combined $pivots
-     */
-    protected function combinePivot($entities, $pivots = [])
-    {
-        // Set array
-        $pivotArray = [];
-        // Loop through all pivot attributes
-        foreach ($pivots as $pivot => $value) {
-            // Combine them to pivot array
-            $pivotArray += [$pivot => $value];
+        $model->taxonomies()->sync($this->combinePivot($taxonomies, [
+            'term_type' => $model->type
+        ]));
+
+        foreach ($taxonomies as $taxonomy) {
+            $taxonomy = Taxonomy::find($taxonomy);
+            $taxonomy->update([
+                'total_post' => $taxonomy->posts()->count(),
+            ]);
         }
-        // Get the total of arrays we need to fill
-        $total = count($entities);
-        // Make filler array
-        $filler = array_fill(0, $total, $pivotArray);
-        // Combine and return filler pivot array with data
-        return array_combine($entities, $filler);
+    }
+    
+    public function update(array $attributes, $id)
+    {
+        $model = parent::update($attributes, $id);
+        $taxonomies = $attributes['taxonomies'] ?? [];
+        $model->taxonomies()->sync($this->combinePivot($taxonomies, [
+            'term_type' => $model->type
+        ]));
+
+        foreach ($taxonomies as $taxonomy) {
+            $taxonomy = Taxonomy::find($taxonomy);
+            $taxonomy->update([
+                'total_post' => $taxonomy->posts()->count(),
+            ]);
+        }
+    }
+
+    /**
+     * @param $repository
+     * @param \Tadcms\System\Models\Post $model
+     */
+    public function entityDeleting($repository, $model)
+    {
+        $model->taxonomies()->detach();
     }
 }

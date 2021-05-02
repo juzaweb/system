@@ -30,8 +30,6 @@ class UpdateUsersTable extends Migration
     
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['verification_token', 'avatar', 'status', 'is_admin']);
-        });
+        Schema::dropIfExists('users');
     }
 }

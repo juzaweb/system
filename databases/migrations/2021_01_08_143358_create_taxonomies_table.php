@@ -13,7 +13,7 @@ class CreateTaxonomiesTable extends Migration
             $table->string('type', 100)->index();
             $table->string('taxonomy', 100)->index();
             $table->bigInteger('parent_id')->nullable()->index();
-            $table->bigInteger('count')->default(0);
+            $table->bigInteger('total_post')->default(0);
             $table->bigInteger('created_by')->nullable()->index();
             $table->bigInteger('updated_by')->nullable()->index();
             $table->timestamps();
@@ -26,7 +26,7 @@ class CreateTaxonomiesTable extends Migration
             $table->string('name', 200);
             $table->string('thumbnail', 150)->nullable();
             $table->text('description')->nullable();
-            $table->string('slug', 100)->index();
+            $table->string('slug', 100)->unique();
 
             $table->unique(['taxonomy_id', 'locale']);
             $table->foreign('taxonomy_id')
