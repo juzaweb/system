@@ -9,19 +9,26 @@ trait SlugAble
     public static function bootSlugAble()
     {
         static::saving(function ($model) {
-            $model->slug = $model->generateSlug($model->{$model->slugSource});
+            /**
+             * @var static $model
+             * */
+            $slug = request()->input('slug');
+            if ($slug || empty($model->id)) {
+                $model->slug = $model->generateSlug($slug);
+            }
         });
     }
     
-    protected function generateSlug($string)
+    protected function generateSlug($slug)
     {
-        $slug = request()->input('slug');
         if ($slug) {
-            return $slug;
+            $string = $slug;
         } else {
-            $slug = substr($string, 0, 70);
-            $slug = Str::slug($slug);
+            $string = $this->{$this->slugSource};
         }
+
+        $slug = substr($string, 0, 70);
+        $slug = Str::slug($slug);
 
         $count = self::where('id', '!=', $this->id)
             ->whereHas('translations', function ($q) use ($slug) {

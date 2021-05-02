@@ -59,12 +59,13 @@ class Post extends Model implements TranslatableContract
     use UserModifyAble, ThumbnailAble, SlugAble, Translatable;
     
     protected $table = 'posts';
+    protected $slugSource = 'title';
+
     protected $fillable = [
         'type',
         'status',
     ];
-    
-    protected $slugSource = 'title';
+
     public $translatedAttributes = [
         'title',
         'content',

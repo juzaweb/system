@@ -57,6 +57,8 @@ class Taxonomy extends Model implements TranslatableContract
     use UserModifyAble, Translatable, SlugAble;
     
     protected $table = 'taxonomies';
+    protected $slugSource = 'name';
+
     protected $fillable = [
         'type',
         'taxonomy',
