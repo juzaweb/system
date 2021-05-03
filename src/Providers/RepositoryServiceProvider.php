@@ -24,8 +24,23 @@ class RepositoryServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Tadcms\System\Repositories\PageRepository',
+            'Tadcms\System\Repositories\PageRepositoryEloquent'
+        );
+
+        $this->app->bind(
             'Tadcms\System\Repositories\TaxonomyRepository',
             'Tadcms\System\Repositories\TaxonomyRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'Tadcms\System\Repositories\UserRepository',
+            'Tadcms\System\Repositories\UserRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'Tadcms\System\Repositories\CommentRepository',
+            'Tadcms\System\Repositories\CommentRepositoryEloquent'
         );
     }
 }
