@@ -7,6 +7,7 @@ use Illuminate\Database\Schema\Builder;
 use Tadcms\System\Providers\RepositoryServiceProvider;
 use Tadcms\System\Middleware\XFrameHeadersMiddleware;
 use Tadcms\System\Providers\BladeCompilerServiceProvider;
+use Tadcms\System\Supports\HookAction;
 
 /**
  * Class Tadcms\System\SystemServiceProvider
@@ -29,6 +30,7 @@ class SystemServiceProvider extends ServiceProvider
     {
         $this->registerServiceProvider();
         $this->registerMergeConfigs();
+        $this->registerSingleton();
         $this->app->register(BladeCompilerServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
     }
@@ -60,6 +62,13 @@ class SystemServiceProvider extends ServiceProvider
         $this->app->register(\Tadcms\System\Providers\RouteServiceProvider::class);
         //$this->app->register(\Tadcms\Providers\PluginServiceProvider::class);
         //$this->app->register(\Tadcms\Providers\BladeServiceProvider::class);
+    }
+
+    protected function registerSingleton()
+    {
+        $this->app->singleton('tadcms.hook', function () {
+            return new HookAction();
+        });
     }
 
     protected function bootPublishes()
