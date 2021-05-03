@@ -13,6 +13,10 @@ use Tadcms\System\Models\User;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    protected $fieldSearchable = [
+        'name' => 'like',
+        'email' => 'like',
+    ];
     /**
      * Specify Model class name
      *
@@ -30,5 +34,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function update(array $attributes, $id)
+    {
+        if (empty($attributes['password'])) {
+            unset($attributes['password']);
+        }
+
+        return parent::update($attributes, $id);
+    }
 }

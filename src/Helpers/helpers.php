@@ -47,6 +47,10 @@ function set_config($key, $value)
 
 function upload_url($path, $default = null)
 {
+    if (is_url($path)) {
+        return $path;
+    }
+
     $storage = Storage::disk(config('file-manager.upload_disk'));
     if ($storage->exists($path)) {
         return $storage->url($path);

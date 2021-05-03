@@ -44,7 +44,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     protected $table = 'users';
-    
+
     use Notifiable;
 
     /**
@@ -57,7 +57,8 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
-        'verification_token'
+        'verification_token',
+        'avatar'
     ];
 
     /**
@@ -80,11 +81,42 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    public function metas() {
+    public function metas()
+    {
         return $this->hasMany('Tadcms\System\Models\UserMeta', 'user_id', 'id');
     }
     
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return ($this->is_admin == 1);
+    }
+
+    public function getAvatar()
+    {
+        if ($this->avatar) {
+            return upload_url('avatars/' . $this->avatar, asset('tadcms/images/avatar.png'));
+        }
+
+        return asset('tadcms/images/avatar.png');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
