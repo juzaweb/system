@@ -17,7 +17,9 @@ class Page extends Model implements TranslatableContract
 {
     use UserModifyAble, ThumbnailAble, SlugAble, Translatable;
 
-    protected $table = 'page';
+    protected $table = 'pages';
+    protected $slugSource = 'name';
+
     protected $fillable = [
         'status',
         'template',
@@ -32,4 +34,19 @@ class Page extends Model implements TranslatableContract
         'thumbnail',
         'slug'
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
+    public function metas()
+    {
+        return $this->hasMany(PostMeta::class, 'post_id', 'id');
+    }
+
+    public function taxonomies()
+    {
+        return $this->belongsToMany('Tadcms\System\Models\Taxonomy', 'term_taxonomies', 'term_id', 'taxonomy_id');
+    }
 }

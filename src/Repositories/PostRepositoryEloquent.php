@@ -4,7 +4,6 @@ namespace Tadcms\System\Repositories;
 
 use Illuminate\Support\Arr;
 use Tadcms\Repository\Eloquent\BaseRepository;
-use Tadcms\Repository\Criteria\RequestCriteria;
 use Tadcms\System\Models\Post;
 use Tadcms\System\Models\Taxonomy;
 
@@ -23,14 +22,6 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
     public function model()
     {
         return Post::class;
-    }
-
-    /**
-     * Boot up the repository, pushing criteria
-     */
-    public function boot()
-    {
-        $this->pushCriteria(app(RequestCriteria::class));
     }
 
     /**

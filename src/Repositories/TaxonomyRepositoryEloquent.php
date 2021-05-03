@@ -3,8 +3,6 @@
 namespace Tadcms\System\Repositories;
 
 use Tadcms\Repository\Eloquent\BaseRepository;
-use Tadcms\Repository\Criteria\RequestCriteria;
-use Tadcms\System\Repositories\TaxonomyRepository;
 use Tadcms\System\Models\Taxonomy;
 
 /**
@@ -24,14 +22,5 @@ class TaxonomyRepositoryEloquent extends BaseRepository implements TaxonomyRepos
         return Taxonomy::class;
     }
 
-    
-
-    /**
-     * Boot up the repository, pushing criteria
-     */
-    public function boot()
-    {
-        $this->pushCriteria(app(RequestCriteria::class));
-    }
     
 }

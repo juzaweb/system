@@ -3,7 +3,6 @@
 namespace Tadcms\System\Repositories;
 
 use Tadcms\Repository\Eloquent\BaseRepository;
-use Tadcms\Repository\Criteria\RequestCriteria;
 use Tadcms\System\Models\Comment;
 
 /**
@@ -21,14 +20,6 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
     public function model()
     {
         return Comment::class;
-    }
-
-    /**
-     * Boot up the repository, pushing criteria
-     */
-    public function boot()
-    {
-        $this->pushCriteria(app(RequestCriteria::class));
     }
     
 }

@@ -22,11 +22,13 @@ class CreatePagesTable extends Migration
         });
 
         Schema::create('page_translations', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('page_id');
             $table->string('locale', 5)->index();
             $table->string('name');
             $table->longText('content')->nullable();
             $table->string('thumbnail', 150)->nullable();
+            $table->string('slug', 150)->unique();
 
             $table->unique(['page_id', 'locale']);
             $table->foreign('page_id')
