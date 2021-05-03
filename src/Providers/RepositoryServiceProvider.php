@@ -42,5 +42,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Tadcms\System\Repositories\CommentRepository',
             'Tadcms\System\Repositories\CommentRepositoryEloquent'
         );
+
+        $this->app->bind(
+            'Tadcms\System\Repositories\MenuRepository',
+            'Tadcms\System\Repositories\MenuRepositoryEloquent'
+        );
     }
 }

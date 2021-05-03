@@ -31,6 +31,7 @@ trait PostTypeHookAction
         $type = Str::singular($objectType);
         $opts = [
             'label' => '',
+            'type_label' => ucfirst($type) .' '. $args['label'],
             'description' => '',
             'repository' => 'Tadcms\\System\\Repositories\\TaxonomyRepository',
             'hierarchical' => false,
