@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Providers;
+namespace Tadcms\System\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

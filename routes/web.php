@@ -21,4 +21,4 @@ Route::group(['prefix' => 'auth'], function () {
     BackendRoutes::auth();
 });
 
-FrontendRoutes::web();
+//FrontendRoutes::web();
