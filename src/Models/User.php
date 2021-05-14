@@ -94,10 +94,10 @@ class User extends Authenticatable
     public function getAvatar()
     {
         if ($this->avatar) {
-            return upload_url('avatars/' . $this->avatar, asset('tadcms/images/avatar.png'));
+            return upload_url('avatars/' . $this->avatar, asset('tadcms/assets/images/avatar.png'));
         }
 
-        return asset('tadcms/images/avatar.png');
+        return asset('tadcms/assets/images/avatar.png');
     }
 
     /**

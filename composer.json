@@ -19,10 +19,10 @@
         "astrotomic/laravel-translatable": "^11.9",
         "blood72/blade-minify": "^1.4",
         "livewire/livewire": "^1.3.6",
-        "tadcms/notification": "1.0.*",
         "tadcms/filemanager": "1.0.*",
         "tadcms/hooks": "1.0.*",
         "tadcms/module": "1.0.*",
+        "tadcms/repository": "1.0.*",
         "tymon/jwt-auth": "^1.0",
         "guzzlehttp/guzzle": "^6.5"
     },

@@ -20,6 +20,19 @@ class HookAction
 
     /**
      * TAD CMS: Add setting form
+     *
+     * @param string $path
+     **/
+    public function loadActionForm($path)
+    {
+        add_filters('tadcms.actions', function ($items) use ($path) {
+            $items[] = $path;
+            return collect($items)->unique();
+        });
+    }
+
+    /**
+     * TAD CMS: Add setting form
      * @param string $key
      * @param array $args
      **/

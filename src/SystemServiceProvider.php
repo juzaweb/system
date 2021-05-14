@@ -60,6 +60,7 @@ class SystemServiceProvider extends ServiceProvider
     protected function registerServiceProvider()
     {
         $this->app->register(\Tadcms\System\Providers\RouteServiceProvider::class);
+        $this->app->register(\Tadcms\System\Providers\HookActionServiceProvider::class);
         //$this->app->register(\Tadcms\Providers\PluginServiceProvider::class);
         //$this->app->register(\Tadcms\Providers\BladeServiceProvider::class);
     }
@@ -75,17 +76,9 @@ class SystemServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/tadcms.php' => config_path('tadcms.php'),
-            __DIR__.'/../config/themes.php' => config_path('themes.php'),
-            __DIR__.'/../config/plugins.php' => config_path('plugins.php'),
-        ], 'config');
-
-        $this->publishes([
-            __DIR__.'/../assets' => public_path('tadcms/assets'),
-        ], 'assets');
-
-        $this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/tadcms'),
-        ], 'lang');
+            //__DIR__.'/../config/themes.php' => config_path('themes.php'),
+            //__DIR__.'/../config/plugins.php' => config_path('plugins.php'),
+        ], 'tadcms_config');
     }
 
     protected function bootMiddlewares()
